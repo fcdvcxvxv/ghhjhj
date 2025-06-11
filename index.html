@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draco Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(-45deg, #1a1a40, #2b2d77, #0d1b2a, #1f4068);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 35px rgba(0, 255, 255, 0.3);
+    }
+
+    .copy-feedback {
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    .copy-feedback.show {
+      opacity: 1;
+    }
+
+    .copy-btn {
+      background-color: #3b82f6;
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .copy-btn:hover {
+      background-color: #2563eb;
+    }
+  </style>
+
+  <script>
+    function copyStep(id, feedbackId) {
+      const code = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const fb = document.getElementById(feedbackId);
+        fb.classList.add("show");
+        setTimeout(() => fb.classList.remove("show"), 1200);
+      });
+    }
+
+    window.onload = () => {
+      anime({
+        targets: '.fade-in',
+        opacity: [0, 1],
+        scale: [0.95, 1],
+        translateY: [20, 0],
+        easing: 'easeOutExpo',
+        duration: 1200,
+        delay: anime.stagger(180)
+      });
+    };
+  </script>
+</head>
+
+<body class="text-white font-sans p-6">
+  <div class="max-w-4xl mx-auto space-y-10 fade-in">
+    <div class="text-center">
+      <h1 class="text-5xl font-extrabold mb-2 bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent animate-pulse">🐉 Draco Panel</h1>
+      <p class="text-gray-300 text-sm italic">by @hopingboyz</p>
+    </div>
+
+    <!-- Panel Setup -->
+    <div class="glass p-6 rounded-2xl space-y-4">
+      <h2 class="text-2xl font-bold">🛠 Panel Setup</h2>
+      <div>
+        <button class="copy-btn" onclick="copyStep('step1', 'fb1')">Copy</button> <span id="fb1" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step1" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">git clone https://github.com/dragonlabsdev/v2panel</pre>
+
+        <button class="copy-btn" onclick="copyStep('step2', 'fb2')">Copy</button> <span id="fb2" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step2" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">curl -sL https://deb.nodesource.com/setup_23.x | sudo bash -</pre>
+
+        <button class="copy-btn" onclick="copyStep('step3', 'fb3')">Copy</button> <span id="fb3" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step3" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">apt-get install nodejs git</pre>
+
+        <button class="copy-btn" onclick="copyStep('step4', 'fb4')">Copy</button> <span id="fb4" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step4" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">cd v2panel</pre>
+
+        <button class="copy-btn" onclick="copyStep('step5', 'fb5')">Copy</button> <span id="fb5" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step5" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">apt install zip -y && unzip panel.zip && cd panel</pre>
+
+        <button class="copy-btn" onclick="copyStep('step6', 'fb6')">Copy</button> <span id="fb6" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step6" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">npm install && npm run seed && npm run createUser</pre>
+
+        <button class="copy-btn" onclick="copyStep('step7', 'fb7')">Copy</button> <span id="fb7" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="step7" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">node .</pre>
+      </div>
+    </div>
+
+    <!-- Daemon Setup -->
+    <div class="glass p-6 rounded-2xl space-y-4">
+      <h2 class="text-2xl font-bold">👾 Daemon Setup</h2>
+      <div>
+        <button class="copy-btn" onclick="copyStep('daemon1', 'fb8')">Copy</button> <span id="fb8" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="daemon1" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">git clone https://github.com/draco-labes/draco-daemon</pre>
+
+        <button class="copy-btn" onclick="copyStep('daemon2', 'fb9')">Copy</button> <span id="fb9" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="daemon2" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">cd draco-daemon</pre>
+
+        <button class="copy-btn" onclick="copyStep('daemon3', 'fb10')">Copy</button> <span id="fb10" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="daemon3" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">npm install</pre>
+
+        <button class="copy-btn" onclick="copyStep('daemon4', 'fb11')">Copy</button> <span id="fb11" class="copy-feedback text-green-400 ml-2">✔</span>
+        <pre id="daemon4" class="bg-black bg-opacity-50 p-2 rounded text-sm font-mono text-green-200">node .</pre>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
